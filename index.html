@@ -28,792 +28,148 @@
     --mono: 'Share Tech Mono', monospace;
     --sans: 'Syne', sans-serif;
   }
- 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 76px; }
- 
   body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--sans);
     overflow-x: hidden;
   }
- 
-  /* Scanline effect — subtle */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.04) 2px,
-      rgba(0,0,0,0.04) 4px
-    );
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
     pointer-events: none;
     z-index: 9999;
   }
- 
-  /* Grid background */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,157,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,157,0.025) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(0,255,157,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,157,0.025) 1px, transparent 1px);
     background-size: 44px 44px;
     pointer-events: none;
     z-index: 0;
   }
- 
-  /* Glow orbs */
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(100px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .orb1 {
-    width: 700px; height: 700px;
-    background: var(--accent2);
-    top: -300px; right: -300px;
-    opacity: 0.08;
-    animation: float1 10s ease-in-out infinite;
-  }
-  .orb2 {
-    width: 500px; height: 500px;
-    background: var(--accent);
-    bottom: -200px; left: -200px;
-    opacity: 0.06;
-    animation: float2 13s ease-in-out infinite;
-  }
+  .orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+  .orb1 { width: 700px; height: 700px; background: var(--accent2); top: -300px; right: -300px; opacity: 0.08; animation: float1 10s ease-in-out infinite; }
+  .orb2 { width: 500px; height: 500px; background: var(--accent); bottom: -200px; left: -200px; opacity: 0.06; animation: float2 13s ease-in-out infinite; }
   @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,40px)} }
   @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
- 
-  /* Top accent line */
-  body > nav::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
-  }
- 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 20px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    background: rgba(17,17,24,0.92);
-    backdrop-filter: blur(24px);
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 2px;
-  }
+  body > nav::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); background: rgba(17,17,24,0.92); backdrop-filter: blur(24px); }
+  .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 2px; }
   .nav-logo span { color: var(--text-dim); }
- 
   .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0; right: 0;
-    height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.2s;
-  }
-  .nav-links a.active { color: var(--accent); }
-  .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a { font-family: var(--mono); font-size: 11px; color: var(--text-dim); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transition: transform 0.2s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { transform: scaleX(1); }
- 
-  .nav-status {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 1px;
-  }
-  .nav-status::before {
-    content: '';
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-    animation: pulse 2s ease-in-out infinite;
-  }
+  .nav-status { display: flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 1px; }
+  .nav-status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
- 
-  /* HERO */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 60px 60px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
- 
+  .hero { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; padding: 120px 60px 60px; max-width: 1200px; margin: 0 auto; }
   .hero-content { max-width: 740px; }
- 
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease 0.1s forwards;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 32px; height: 1px;
-    background: var(--accent);
-  }
- 
-  .hero h1 {
-    font-size: clamp(52px, 8vw, 96px);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -3px;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease 0.2s forwards;
-    overflow: visible;
-    padding-bottom: 12px;
-  }
+  .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px; display: flex; align-items: center; gap: 14px; opacity: 0; animation: fadeUp 0.5s ease 0.1s forwards; }
+  .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 { font-size: clamp(52px, 8vw, 96px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards; overflow: visible; padding-bottom: 12px; }
   .name-first { color: var(--text); }
-  .name-last {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--accent);
-    display: block;
-  }
- 
-  .hero-terminal {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease 0.3s forwards;
-  }
+  .name-last { color: transparent; -webkit-text-stroke: 1.5px var(--accent); display: block; }
+  .hero-terminal { font-family: var(--mono); font-size: 13px; color: var(--text-dim); margin-bottom: 28px; display: flex; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 0.5s ease 0.3s forwards; }
   .hero-terminal .prompt { color: var(--accent); }
   .hero-terminal .cmd { color: var(--text-mid); }
   .blink { animation: blink 1s step-end infinite; color: var(--accent); }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
- 
-  .hero-desc {
-    font-size: 16px;
-    color: var(--text-mid);
-    line-height: 1.85;
-    margin-bottom: 52px;
-    max-width: 540px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease 0.4s forwards;
-  }
+  .hero-desc { font-size: 16px; color: var(--text-mid); line-height: 1.85; margin-bottom: 52px; max-width: 540px; opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards; }
   .hero-desc strong { color: var(--text); }
- 
-  .hero-btns {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.5s ease 0.5s forwards;
-  }
- 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
- 
-  .btn-primary {
-    padding: 14px 32px;
-    background: var(--accent);
-    color: #000;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    cursor: pointer;
-    border: none;
-  }
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--accent);
-    box-shadow: inset 0 0 0 1px var(--accent);
-  }
- 
-  .btn-secondary {
-    padding: 14px 32px;
-    border: 1px solid var(--accent2);
-    color: var(--accent2);
-    background: var(--accent2-dim);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-  .btn-secondary:hover {
-    border-color: var(--accent2);
-    color: #fff;
-    background: rgba(123,97,255,0.3);
-  }
- 
-  /* STATS BAR */
-  .stats-bar {
-    position: relative;
-    z-index: 1;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 32px 60px;
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    flex-wrap: wrap;
-  }
-  .stat {
-    text-align: center;
-    position: relative;
-  }
-  .stat:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: -40px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 32px;
-    background: var(--border-bright);
-  }
-  .stat-num {
-    font-family: var(--mono);
-    font-size: 28px;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 700;
-    text-shadow: 0 0 24px var(--accent-glow);
-  }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
- 
-  /* SECTIONS */
-  section {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 110px 60px;
-    scroll-margin-top: 72px;
-  }
- 
-  .section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-label::before {
-    content: '';
-    width: 20px; height: 1px;
-    background: var(--accent);
-  }
- 
-  .section-title {
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: var(--text);
-    margin-bottom: 0;
-  }
- 
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 44px;
-    height: 2px;
-    background: var(--accent);
-    margin-top: 14px;
-    margin-bottom: 52px;
-  }
- 
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .skill-card {
-    background: var(--surface);
-    padding: 36px 32px;
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 2px; height: 0;
-    background: var(--accent);
-    transition: height 0.35s;
-  }
-  .skill-card::after {
-    content: attr(data-num);
-    position: absolute;
-    bottom: 16px; right: 20px;
-    font-family: var(--mono);
-    font-size: 36px;
-    color: rgba(0,255,157,0.04);
-    font-weight: 700;
-    line-height: 1;
-    pointer-events: none;
-  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.5s ease 0.5s forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .btn-primary { padding: 14px 32px; background: var(--accent); color: #000; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); cursor: pointer; border: none; }
+  .btn-primary:hover { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .btn-secondary { padding: 14px 32px; border: 1px solid var(--accent2); color: var(--accent2); background: var(--accent2-dim); font-family: var(--mono); font-size: 12px; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; transition: all 0.2s; cursor: pointer; }
+  .btn-secondary:hover { border-color: var(--accent2); color: #fff; background: rgba(123,97,255,0.3); }
+  .stats-bar { position: relative; z-index: 1; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 60px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; }
+  .stat { text-align: center; position: relative; }
+  .stat:not(:last-child)::after { content: ''; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); width: 1px; height: 32px; background: var(--border-bright); }
+  .stat-num { font-family: var(--mono); font-size: 28px; color: var(--accent); display: block; margin-bottom: 6px; font-weight: 700; text-shadow: 0 0 24px var(--accent-glow); }
+  .stat-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; }
+  section { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 110px 60px; scroll-margin-top: 72px; }
+  .section-label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -1px; color: var(--text); margin-bottom: 0; }
+  .section-title::after { content: ''; display: block; width: 44px; height: 2px; background: var(--accent); margin-top: 14px; margin-bottom: 52px; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-card { background: var(--surface); padding: 36px 32px; transition: background 0.25s; position: relative; overflow: hidden; }
+  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--accent); transition: height 0.35s; }
+  .skill-card::after { content: attr(data-num); position: absolute; bottom: 16px; right: 20px; font-family: var(--mono); font-size: 36px; color: rgba(0,255,157,0.04); font-weight: 700; line-height: 1; pointer-events: none; }
   .skill-card:hover { background: var(--surface2); }
   .skill-card:hover::before { height: 100%; }
- 
   .skill-icon { font-size: 22px; margin-bottom: 18px; display: block; }
-  .skill-name {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 10px;
-    color: var(--text);
-    letter-spacing: 0.3px;
-  }
-  .skill-desc {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-mid);
-    line-height: 1.85;
-  }
- 
-  /* ACHIEVEMENTS TIMELINE */
-  .achievements {
-    border-left: 1px solid var(--border-bright);
-    padding-left: 44px;
-    margin-left: 20px;
-  }
-  .achievement {
-    position: relative;
-    padding-bottom: 52px;
-  }
-  .achievement::before {
-    content: '';
-    position: absolute;
-    left: -50px; top: 7px;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 16px var(--accent-glow);
-  }
-  .achievement-date {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent2);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-  .achievement-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--text);
-  }
-  .achievement-desc {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-mid);
-    line-height: 1.8;
-    max-width: 580px;
-  }
- 
-  .badge {
-    display: inline-block;
-    padding: 4px 12px;
-    background: var(--accent-dim);
-    border: 1px solid rgba(0,255,157,0.2);
-    color: var(--accent);
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 12px;
-  }
-  .badge-purple {
-    background: var(--accent2-dim);
-    border-color: rgba(123,97,255,0.2);
-    color: var(--accent2);
-  }
-  .badge-red {
-    background: rgba(255,107,107,0.1);
-    border-color: rgba(255,107,107,0.2);
-    color: var(--accent3);
-  }
- 
-  /* Terminal callout */
-  .terminal-box {
-    background: #0a0a10;
-    border: 1px solid var(--border-bright);
-    border-left: 2px solid var(--accent);
-    padding: 18px 20px;
-    margin-top: 16px;
-    max-width: 600px;
-    font-family: var(--mono);
-    font-size: 11px;
-    line-height: 1.9;
-    color: var(--text-mid);
-  }
+  .skill-name { font-weight: 700; font-size: 15px; margin-bottom: 10px; color: var(--text); letter-spacing: 0.3px; }
+  .skill-desc { font-family: var(--mono); font-size: 11px; color: var(--text-mid); line-height: 1.85; }
+  .achievements { border-left: 1px solid var(--border-bright); padding-left: 44px; margin-left: 20px; }
+  .achievement { position: relative; padding-bottom: 52px; }
+  .achievement::before { content: ''; position: absolute; left: -50px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 16px var(--accent-glow); }
+  .achievement-date { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
+  .achievement-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .achievement-desc { font-family: var(--mono); font-size: 12px; color: var(--text-mid); line-height: 1.8; max-width: 580px; }
+  .badge { display: inline-block; padding: 4px 12px; background: var(--accent-dim); border: 1px solid rgba(0,255,157,0.2); color: var(--accent); font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-top: 12px; }
+  .badge-purple { background: var(--accent2-dim); border-color: rgba(123,97,255,0.2); color: var(--accent2); }
+  .badge-red { background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.2); color: var(--accent3); }
+  .terminal-box { background: #0a0a10; border: 1px solid var(--border-bright); border-left: 2px solid var(--accent); padding: 18px 20px; margin-top: 16px; max-width: 600px; font-family: var(--mono); font-size: 11px; line-height: 1.9; color: var(--text-mid); }
   .terminal-box .t-comment { color: var(--text-dim); }
   .terminal-box .t-key { color: var(--accent); }
   .terminal-box .t-val { color: var(--text-mid); }
   .terminal-box .t-warn { color: var(--accent3); }
   .terminal-box .t-ok { color: var(--accent); }
- 
-  /* ARTICLES */
-  .articles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-  }
-  .article-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 32px;
-    text-decoration: none;
-    display: block;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .article-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-  .article-card::after {
-    content: '→';
-    position: absolute;
-    bottom: 24px; right: 24px;
-    font-family: var(--mono);
-    color: var(--accent);
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.2s;
-  }
-  .article-card:hover {
-    border-color: rgba(0,255,157,0.2);
-    background: var(--surface2);
-  }
+  .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .article-card { background: var(--surface); border: 1px solid var(--border); padding: 32px; text-decoration: none; display: block; transition: all 0.25s; position: relative; overflow: hidden; }
+  .article-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .article-card::after { content: '→'; position: absolute; bottom: 24px; right: 24px; font-family: var(--mono); color: var(--accent); opacity: 0; transform: translateX(-8px); transition: all 0.2s; }
+  .article-card:hover { border-color: rgba(0,255,157,0.2); background: var(--surface2); }
   .article-card:hover::before { transform: scaleX(1); }
   .article-card:hover::after { opacity: 1; transform: translateX(0); }
- 
-  .article-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--accent2);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .article-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.4;
-    margin-bottom: 12px;
-  }
-  .article-desc {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-mid);
-    line-height: 1.85;
-  }
- 
-  /* ROADMAP */
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .roadmap-item {
-    background: var(--surface);
-    padding: 40px 32px;
-    position: relative;
-    overflow: hidden;
-  }
-  .roadmap-item:first-child {
-    border-top: 2px solid var(--accent);
-  }
-  .roadmap-num {
-    font-family: var(--mono);
-    font-size: 52px;
-    color: rgba(0,255,157,0.05);
-    font-weight: 700;
-    position: absolute;
-    top: 16px; right: 20px;
-    line-height: 1;
-  }
-  .roadmap-phase {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .roadmap-title {
-    font-size: 19px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-  .roadmap-date {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent2);
-    margin-bottom: 16px;
-  }
-  .roadmap-desc {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-mid);
-    line-height: 1.8;
-  }
- 
-  /* CONTACT */
+  .article-tag { font-family: var(--mono); font-size: 9px; color: var(--accent2); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  .article-title { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 12px; }
+  .article-desc { font-family: var(--mono); font-size: 11px; color: var(--text-mid); line-height: 1.85; }
+  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .roadmap-item { background: var(--surface); padding: 40px 32px; position: relative; overflow: hidden; }
+  .roadmap-item:first-child { border-top: 2px solid var(--accent); }
+  .roadmap-num { font-family: var(--mono); font-size: 52px; color: rgba(0,255,157,0.05); font-weight: 700; position: absolute; top: 16px; right: 20px; line-height: 1; }
+  .roadmap-phase { font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .roadmap-title { font-size: 19px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .roadmap-date { font-family: var(--mono); font-size: 10px; color: var(--accent2); margin-bottom: 16px; }
+  .roadmap-desc { font-family: var(--mono); font-size: 11px; color: var(--text-mid); line-height: 1.8; }
   .links-grid { display: flex; gap: 14px; flex-wrap: wrap; }
-  .link-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 26px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-mid);
-    text-decoration: none;
-    font-family: var(--mono);
-    font-size: 12px;
-    transition: all 0.2s;
-    letter-spacing: 1px;
-  }
-  .link-card:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-dim);
-  }
+  .link-card { display: flex; align-items: center; gap: 12px; padding: 16px 26px; background: var(--surface); border: 1px solid var(--border); color: var(--text-mid); text-decoration: none; font-family: var(--mono); font-size: 12px; transition: all 0.2s; letter-spacing: 1px; }
+  .link-card:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
   .link-card .link-icon { font-size: 18px; }
- 
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 40px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    background: var(--surface);
-  }
+  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--surface); }
   .footer-text { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
   .footer-text span { color: var(--accent); }
- 
-  /* SECTION DIVIDER */
-  .divider {
-    position: relative;
-    z-index: 1;
-    height: 1px;
-    background: var(--border);
-  }
- 
-  /* MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .modal-overlay.active {
-    display: flex;
-    animation: modalIn 0.2s ease;
-  }
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .modal {
-    background: var(--surface);
-    border: 1px solid var(--border-bright);
-    width: 100%;
-    max-width: 560px;
-    padding: 40px;
-    position: relative;
-    max-height: 85vh;
-    overflow-y: auto;
-    box-shadow: 0 0 60px rgba(0,255,157,0.05);
-  }
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-  }
-  .modal-title {
-    font-family: var(--mono);
-    font-size: 18px;
-    color: var(--accent);
-    letter-spacing: 2px;
-  }
-  .modal-close {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    font-size: 13px;
-    width: 32px; height: 32px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
+  .divider { position: relative; z-index: 1; height: 1px; background: var(--border); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
+  .modal-overlay.active { display: flex; animation: modalIn 0.2s ease; }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  .modal { background: var(--surface); border: 1px solid var(--border-bright); width: 100%; max-width: 560px; padding: 40px; position: relative; max-height: 85vh; overflow-y: auto; box-shadow: 0 0 60px rgba(0,255,157,0.05); }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+  .modal-title { font-family: var(--mono); font-size: 18px; color: var(--accent); letter-spacing: 2px; }
+  .modal-close { background: none; border: 1px solid var(--border); color: var(--text-dim); font-size: 13px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
   .modal-close:hover { border-color: var(--accent3); color: var(--accent3); }
-  .modal-section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent2);
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    margin-top: 22px;
-    text-transform: uppercase;
-  }
+  .modal-section-label { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 2px; margin-bottom: 10px; margin-top: 22px; text-transform: uppercase; }
   .modal-section-label:first-of-type { margin-top: 0; }
-  .modal-link-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    margin-bottom: 8px;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-  .modal-link-card:hover {
-    border-color: rgba(0,255,157,0.35);
-    background: var(--surface2);
-  }
+  .modal-link-card { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--bg); border: 1px solid var(--border); text-decoration: none; margin-bottom: 8px; transition: all 0.2s; cursor: pointer; }
+  .modal-link-card:hover { border-color: rgba(0,255,157,0.35); background: var(--surface2); }
   .modal-link-icon { font-size: 20px; flex-shrink: 0; }
-  .modal-link-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .modal-link-desc {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-dim);
-  }
-  .modal-link-arrow {
-    margin-left: auto;
-    color: var(--accent);
-    font-family: var(--mono);
-    opacity: 0;
-    transition: opacity 0.2s;
-    flex-shrink: 0;
-  }
+  .modal-link-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .modal-link-desc { font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
+  .modal-link-arrow { margin-left: auto; color: var(--accent); font-family: var(--mono); opacity: 0; transition: opacity 0.2s; flex-shrink: 0; }
   .modal-link-card:hover .modal-link-arrow { opacity: 1; }
- 
-  button.btn-primary, button.btn-secondary {
-    border: none;
-    cursor: pointer;
-    font-family: var(--mono);
-  }
-  button.btn-secondary {
-    background: transparent;
-    border: 1px solid var(--border-bright);
-  }
- 
-  /* Photo */
-  .hero-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center 15%;
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 40px var(--accent-glow);
-    margin-bottom: 28px;
-    display: block;
-  }
- 
+  button.btn-primary, button.btn-secondary { border: none; cursor: pointer; font-family: var(--mono); }
+  button.btn-secondary { background: transparent; border: 1px solid var(--border-bright); }
+  .hero-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: center 15%; border: 2px solid var(--accent); box-shadow: 0 0 40px var(--accent-glow); margin-bottom: 28px; display: block; }
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
     .nav-links { gap: 20px; }
@@ -826,7 +182,6 @@
 </style>
 </head>
 <body>
- 
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
  
@@ -857,7 +212,7 @@
     </div>
     <p class="hero-desc">
       1st year Cybersecurity student at <strong>RCC Institute of Information Technology, Kolkata.</strong><br><br>
-      Specializing in <strong>AI Red Teaming, Prompt Injection, XSS, SQLi</strong> and web application security.
+      Specializing in <strong>AI Red Teaming, Prompt Injection, XSS, CSRF, SSRF, XXE</strong> and web application security.
       Building toward an AI Security career — Bangalore by 2027, Masters abroad by 2029.
     </p>
     <div class="hero-btns">
@@ -870,16 +225,20 @@
 <!-- Stats -->
 <div class="stats-bar">
   <div class="stat">
-    <span class="stat-num">60+</span>
+    <span class="stat-num">76+</span>
     <span class="stat-label">GitHub Commits</span>
   </div>
   <div class="stat">
-    <span class="stat-num">7</span>
+    <span class="stat-num">8</span>
     <span class="stat-label">Medium Articles</span>
   </div>
   <div class="stat">
-    <span class="stat-num">Top 8%</span>
-    <span class="stat-label">Gandalf Players</span>
+    <span class="stat-num">All 8</span>
+    <span class="stat-label">Gandalf Levels</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">Top 10</span>
+    <span class="stat-label">Inter-College CTF</span>
   </div>
   <div class="stat">
     <span class="stat-num">33</span>
@@ -901,32 +260,32 @@
     <div class="skill-card" data-num="01">
       <span class="skill-icon">🔴</span>
       <div class="skill-name">AI Red Teaming</div>
-      <div class="skill-desc">Prompt injection, jailbreaking, token fragmentation, positional extraction, system prompt extraction. Top 8% on Gandalf by Lakera.</div>
+      <div class="skill-desc">Prompt injection, jailbreaking, token fragmentation, positional extraction, acrostic extraction. Completed all 8 Gandalf levels including Gandalf the White.</div>
     </div>
     <div class="skill-card" data-num="02">
       <span class="skill-icon">💉</span>
       <div class="skill-name">Web Application Security</div>
-      <div class="skill-desc">XSS (Reflected, Stored, DOM), SQLi, Blind SQLi, Path Traversal, Access Control, Authentication flaws. PortSwigger Practitioner level.</div>
+      <div class="skill-desc">XSS, CSRF, SSRF, XXE (Expert), SQLi, Blind SQLi, Path Traversal, Access Control. Full PortSwigger curriculum complete including Expert-level labs.</div>
     </div>
     <div class="skill-card" data-num="03">
       <span class="skill-icon">🔧</span>
       <div class="skill-name">Tools</div>
-      <div class="skill-desc">Burp Suite, Nmap, Wireshark, Kali Linux, Netcat, OpenSSL, theHarvester, Shodan, Google Dorking.</div>
+      <div class="skill-desc">Burp Suite, Nmap, Wireshark, Kali Linux, Netcat, OpenSSL, theHarvester, Shodan, Google Dorking, VirtualBox.</div>
     </div>
     <div class="skill-card" data-num="04">
       <span class="skill-icon">🐍</span>
       <div class="skill-name">Python Security Tools</div>
-      <div class="skill-desc">Built port scanner with service detection and security web crawler with endpoint detection from scratch.</div>
+      <div class="skill-desc">Built port scanner with service detection and security web crawler with endpoint detection from scratch using Python, argparse and socket.</div>
     </div>
     <div class="skill-card" data-num="05">
       <span class="skill-icon">🕵️</span>
       <div class="skill-name">OSINT & Reconnaissance</div>
-      <div class="skill-desc">Google Dorking, Shodan, theHarvester, passive and active recon techniques documented with real-world examples.</div>
+      <div class="skill-desc">Google Dorking, Shodan, theHarvester, passive and active recon. Real incident response — traced live account hijacking attacker to source.</div>
     </div>
     <div class="skill-card" data-num="06">
       <span class="skill-icon">📝</span>
       <div class="skill-name">Technical Writing</div>
-      <div class="skill-desc">6 published Medium articles on cybersecurity topics. GitHub writeups covering all major labs and CTF challenges.</div>
+      <div class="skill-desc">8 published Medium articles on cybersecurity. GitHub writeups covering all PortSwigger labs, CTF challenges and real-world findings.</div>
     </div>
   </div>
 </section>
@@ -941,22 +300,52 @@
  
     <div class="achievement">
       <div class="achievement-date">May 2026</div>
-      <div class="achievement-title">Gandalf Prompt Injection — Top 8% Worldwide</div>
-      <div class="achievement-desc">Cleared all 7 levels of Lakera's Gandalf challenge using 7 distinct prompt injection techniques — including positional character extraction invented on the fly at 2AM.</div>
+      <div class="achievement-title">Inter-College CTF Techtrix '26 — Top 10 Solo Finish</div>
+      <div class="achievement-desc">Competed alone as team Hack4Fun in a 24-hour inter-college CTF. Finished Top 10 with 1521 points against multi-member teams. Solved challenges across Web Exploitation, Cryptography, Steganography, Reverse Engineering and Forensics. 2nd place in prelims out of 54 teams.</div>
+      <span class="badge">CTF</span>
+      <span class="badge badge-purple">Solo Competitor</span>
+    </div>
+ 
+    <div class="achievement">
+      <div class="achievement-date">May 2026</div>
+      <div class="achievement-title">Gandalf AI Prompt Injection — All 8 Levels Complete</div>
+      <div class="achievement-desc">Completed all 8 levels of Lakera's Gandalf challenge including Gandalf the White — the final boss. Used acrostic poetry technique to extract the final password, then reconstructed remaining characters through permutation and combination.</div>
       <span class="badge">AI Red Teaming</span>
     </div>
  
     <div class="achievement">
       <div class="achievement-date">May 2026</div>
-      <div class="achievement-title">PortSwigger CSRF — Complete Section Finished</div>
-      <div class="achievement-desc">Completed all CSRF labs including every Practitioner bypass technique — token validation flaws, CRLF cookie injection, SameSite Strict/Lax bypasses, OAuth cookie refresh exploitation, and Referer header manipulation. Full writeups on GitHub.</div>
+      <div class="achievement-title">PortSwigger XXE — Complete Section + Expert Lab</div>
+      <div class="achievement-desc">Completed full XXE curriculum including the Expert-level blind XXE lab — exploiting local DTD repurposing to exfiltrate /etc/passwd via error messages without Burp Collaborator. Also solved XInclude bypass and SVG file upload XXE.</div>
+      <div class="terminal-box">
+        <span class="t-comment">// expert technique</span><br>
+        <span class="t-key">VECTOR</span> &nbsp;<span class="t-val">→ Local DTD repurposing via parameter entities</span><br>
+        <span class="t-key">METHOD</span> &nbsp;<span class="t-val">→ FileNotFoundException error-based exfiltration</span><br>
+        <span class="t-key">TARGET</span> &nbsp;<span class="t-val">→ /etc/passwd via /usr/share/yelp/dtd/docbookx.dtd</span><br>
+        <span class="t-ok">SOLVED</span> &nbsp;<span class="t-val">→ No Burp Collaborator required</span>
+      </div>
+      <span class="badge">Web Security</span>
+      <span class="badge badge-red">Expert Level</span>
+    </div>
+ 
+    <div class="achievement">
+      <div class="achievement-date">May 2026</div>
+      <div class="achievement-title">PortSwigger SSRF — Complete Section</div>
+      <div class="achievement-desc">Completed all SSRF labs including blacklist bypass (127.1 + double URL encoding), internal network scanning via Intruder, and chaining SSRF with open redirect to bypass restrictions and access internal admin. Extracted AWS IAM credentials via EC2 metadata endpoint.</div>
+      <span class="badge">Web Security</span>
+    </div>
+ 
+    <div class="achievement">
+      <div class="achievement-date">May 2026</div>
+      <div class="achievement-title">PortSwigger CSRF — Complete Section</div>
+      <div class="achievement-desc">Completed all CSRF Practitioner labs including token validation bypasses, CRLF cookie injection, SameSite Strict/Lax bypasses, OAuth cookie refresh exploitation, and Referer header manipulation. Full writeups on GitHub and Medium.</div>
       <span class="badge">Web Security</span>
     </div>
  
     <div class="achievement">
       <div class="achievement-date">May 2026</div>
       <div class="achievement-title">PortSwigger XSS — Apprentice to Practitioner</div>
-      <div class="achievement-desc">Solved all Apprentice XSS labs + multiple Practitioner labs including AngularJS template injection in one session using Burp Suite. Full writeups published on GitHub and Medium.</div>
+      <div class="achievement-desc">Solved all Apprentice XSS labs + all Practitioner DOM XSS labs including AngularJS template injection, document.write sinks, Reflected and Stored DOM XSS. Full writeups published on GitHub and Medium.</div>
       <span class="badge">Web Security</span>
     </div>
  
@@ -990,23 +379,9 @@
     </div>
  
     <div class="achievement">
-      <div class="achievement-date">Apr 2026</div>
-      <div class="achievement-title">1st Rank — College CTF Competition</div>
-      <div class="achievement-desc">Ranked 1st in cybersecurity CTF competition at RCC Institute of Information Technology. Writeup documented and published.</div>
-      <span class="badge">CTF</span>
-    </div>
- 
-    <div class="achievement">
-      <div class="achievement-date">Apr 2026</div>
-      <div class="achievement-title">HackerDNA — Certificate of Achievement</div>
-      <div class="achievement-desc">Rank #570 globally, 35 points, 5 labs completed. LinkedIn verified.</div>
-      <span class="badge">Recognition</span>
-    </div>
- 
-    <div class="achievement">
       <div class="achievement-date">2026</div>
       <div class="achievement-title">Deloitte Forage — Commendation for Outstanding Work</div>
-      <div class="achievement-desc">Received commendation for outstanding performance. Also holds IBM SkillsBuild cybersecurity certificate.</div>
+      <div class="achievement-desc">Received commendation for outstanding performance on Deloitte Australia Cybersecurity Job Simulation. Also holds IBM SkillsBuild cybersecurity certificate and HackerDNA Rank #570.</div>
       <span class="badge">Certification</span>
     </div>
  
@@ -1025,10 +400,15 @@
       <div class="article-title">I Spent a Week Breaking Every CSRF Defense on PortSwigger</div>
       <div class="article-desc">Token bypasses, CRLF injection, SameSite bypasses, OAuth exploitation, Referer manipulation. Real payloads. Full practitioner walkthrough.</div>
     </a>
+    <a href="https://medium.com/p/759bd4fa7a36" target="_blank" class="article-card">
+      <div class="article-tag">SSRF · Web Security</div>
+      <div class="article-title">I Broke Into Internal Networks Using SSRF — Here's Exactly How</div>
+      <div class="article-desc">Localhost access, internal IP scanning, blacklist bypass via double encoding, and chaining SSRF with open redirect. Real payloads.</div>
+    </a>
     <a href="https://medium.com/@nilanjan.calculus/ai-vs-cybersecurity-student-how-i-cracked-all-7-levels-of-gandalf-using-prompt-injection-a20a4c8fafa1" target="_blank" class="article-card">
       <div class="article-tag">Prompt Injection · AI Security</div>
-      <div class="article-title">AI vs Cybersecurity Student: How I Cracked All 7 Levels of Gandalf</div>
-      <div class="article-desc">Top 8% worldwide. 7 levels, 7 techniques — from direct extraction to positional character extraction invented at 2AM.</div>
+      <div class="article-title">AI vs Cybersecurity Student: How I Cracked All 8 Levels of Gandalf</div>
+      <div class="article-desc">All 8 levels complete including Gandalf the White. Acrostic poetry extraction, permutation reconstruction, and more.</div>
     </a>
     <a href="https://medium.com/@nilanjan.calculus/from-prompt-injection-to-xss-my-first-night-attacking-ai-and-web-systems-8255a6ecc45f" target="_blank" class="article-card">
       <div class="article-tag">XSS · Prompt Injection</div>
@@ -1036,14 +416,9 @@
       <div class="article-desc">All Apprentice XSS labs + first Practitioner solved in one 4-hour session. Burp Suite, DOM injection, AngularJS template injection.</div>
     </a>
     <a href="https://medium.com/@nilanjan.calculus" target="_blank" class="article-card">
-      <div class="article-tag">SQL Injection · Web Security</div>
-      <div class="article-title">SQL Injection Series — From Basic to Blind SQLi</div>
-      <div class="article-desc">Full series covering SQLi theory, exploitation, database extraction, and blind SQL injection with conditional responses.</div>
-    </a>
-    <a href="https://medium.com/@nilanjan.calculus" target="_blank" class="article-card">
-      <div class="article-tag">Medium · 6 Articles</div>
-      <div class="article-title">View All Articles on Medium →</div>
-      <div class="article-desc">6 published technical writeups covering XSS, SQLi, Prompt Injection, AI Security, OSINT and more.</div>
+      <div class="article-tag">Medium · 8 Articles</div>
+      <div class="article-title">View All 8 Articles on Medium →</div>
+      <div class="article-desc">8 published technical writeups covering XSS, CSRF, SSRF, XXE, SQLi, Prompt Injection, AI Security, OSINT and more.</div>
     </a>
   </div>
 </section>
@@ -1060,20 +435,20 @@
       <div class="roadmap-phase">Current</div>
       <div class="roadmap-title">Foundation & AI Security</div>
       <div class="roadmap-date">Now → Dec 2026</div>
-      <div class="roadmap-desc">Complete PortSwigger curriculum. Master prompt injection, LLM vulnerabilities, OWASP Top 10 for LLMs. Build AI red team lab.</div>
+      <div class="roadmap-desc">Complete PortSwigger curriculum. Master prompt injection, LLM vulnerabilities, OWASP Top 10 for LLMs. Build AI red team lab. Bug bounty attempts.</div>
     </div>
     <div class="roadmap-item">
       <div class="roadmap-num">02</div>
       <div class="roadmap-phase">Target</div>
       <div class="roadmap-title">Bangalore Internship</div>
       <div class="roadmap-date">May 2027</div>
-      <div class="roadmap-desc">Land AI Security / Red Team internship at companies like Barracuda, CloudSEK, Safe Security, or Cisco in Bangalore.</div>
+      <div class="roadmap-desc">Land AI Security / Red Team internship at companies like Astra Security, CloudSEK, Barracuda, Safe Security, or Cisco in Bangalore.</div>
     </div>
     <div class="roadmap-item">
       <div class="roadmap-num">03</div>
       <div class="roadmap-phase">Vision</div>
       <div class="roadmap-title">Masters Abroad — Germany</div>
-      <div class="roadmap-date">2029</div>
+      <div class="roadmap-date">2029–2030</div>
       <div class="roadmap-desc">Masters in Cybersecurity at TU Darmstadt or Saarland (CISPA). DAAD scholarship. Published research in AI security.</div>
     </div>
   </div>
@@ -1119,7 +494,7 @@
       <div class="modal-link-icon">🐙</div>
       <div>
         <div class="modal-link-title">cybersecurity-writeups</div>
-        <div class="modal-link-desc">45+ commits · Bandit, PortSwigger, XSS, SQLi, Prompt Injection, OSINT, Python tools</div>
+        <div class="modal-link-desc">76+ commits · Bandit, PortSwigger (XSS, CSRF, SSRF, XXE), SQLi, Prompt Injection, OSINT, Python tools</div>
       </div>
       <div class="modal-link-arrow">→</div>
     </a>
@@ -1132,27 +507,35 @@
       <div class="modal-link-arrow">→</div>
     </a>
     <div class="modal-section-label">// Medium Articles</div>
-    <a href="https://medium.com/@nilanjan.calculus/ai-vs-cybersecurity-student-how-i-cracked-all-7-levels-of-gandalf-using-prompt-injection-a20a4c8fafa1" target="_blank" class="modal-link-card">
+    <a href="https://medium.com/@nilanjan.calculus/i-spent-a-week-breaking-every-csrf-defense-on-portswigger-heres-what-i-learned-15fc5d91be4c" target="_blank" class="modal-link-card">
       <div class="modal-link-icon">✍️</div>
       <div>
-        <div class="modal-link-title">AI vs Cybersecurity Student — Gandalf Prompt Injection</div>
-        <div class="modal-link-desc">Top 8% worldwide · 7 levels · 7 techniques</div>
+        <div class="modal-link-title">Breaking Every CSRF Defense on PortSwigger</div>
+        <div class="modal-link-desc">All Practitioner bypasses · CRLF injection · SameSite · OAuth</div>
       </div>
       <div class="modal-link-arrow">→</div>
     </a>
-    <a href="https://medium.com/@nilanjan.calculus/from-prompt-injection-to-xss-my-first-night-attacking-ai-and-web-systems-8255a6ecc45f" target="_blank" class="modal-link-card">
+    <a href="https://medium.com/p/759bd4fa7a36" target="_blank" class="modal-link-card">
       <div class="modal-link-icon">✍️</div>
       <div>
-        <div class="modal-link-title">From Prompt Injection to XSS</div>
-        <div class="modal-link-desc">Apprentice to Practitioner in one session · Burp Suite</div>
+        <div class="modal-link-title">Breaking Into Internal Networks Using SSRF</div>
+        <div class="modal-link-desc">Localhost · IP scanning · Blacklist bypass · Open redirect chain</div>
+      </div>
+      <div class="modal-link-arrow">→</div>
+    </a>
+    <a href="https://medium.com/@nilanjan.calculus/ai-vs-cybersecurity-student-how-i-cracked-all-7-levels-of-gandalf-using-prompt-injection-a20a4c8fafa1" target="_blank" class="modal-link-card">
+      <div class="modal-link-icon">✍️</div>
+      <div>
+        <div class="modal-link-title">AI vs Cybersecurity Student — Gandalf All 8 Levels</div>
+        <div class="modal-link-desc">All levels including Gandalf the White · Acrostic extraction</div>
       </div>
       <div class="modal-link-arrow">→</div>
     </a>
     <a href="https://medium.com/@nilanjan.calculus" target="_blank" class="modal-link-card">
       <div class="modal-link-icon">✍️</div>
       <div>
-        <div class="modal-link-title">All 6 Articles — Medium Profile</div>
-        <div class="modal-link-desc">SQLi, XSS, Prompt Injection, AI Security and more</div>
+        <div class="modal-link-title">All 8 Articles — Medium Profile</div>
+        <div class="modal-link-desc">XXE, SSRF, CSRF, XSS, SQLi, Prompt Injection, AI Security, OSINT</div>
       </div>
       <div class="modal-link-arrow">→</div>
     </a>
@@ -1175,11 +558,11 @@
       </div>
       <div class="modal-link-arrow">→</div>
     </a>
-    <a href="mailto:nilanjan.calculus@gmail.com" class="modal-link-card">
+    <a href="mailto:nilanjanchowdhury965@gmail.com" class="modal-link-card">
       <div class="modal-link-icon">📧</div>
       <div>
         <div class="modal-link-title">Email</div>
-        <div class="modal-link-desc">nilanjan.calculus@gmail.com</div>
+        <div class="modal-link-desc">nilanjanchowdhury965@gmail.com</div>
       </div>
       <div class="modal-link-arrow">→</div>
     </a>
