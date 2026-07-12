@@ -125,6 +125,13 @@
   .terminal-box .t-val { color: var(--text-mid); }
   .terminal-box .t-warn { color: var(--accent3); }
   .terminal-box .t-ok { color: var(--accent); }
+  .achievement.featured::before { background: var(--accent3); width: 12px; height: 12px; left: -51px; top: 6px; box-shadow: 0 0 18px rgba(255,107,107,0.55); }
+  .achievement.featured .achievement-title { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .featured-tag { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #000; background: linear-gradient(90deg, var(--accent3), #ffb86b); padding: 4px 10px; }
+  .achievement-tagline { font-family: var(--mono); font-size: 11px; color: var(--accent3); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 8px; margin-bottom: 6px; }
+  .achievement-links { margin-top: 16px; display: flex; gap: 22px; flex-wrap: wrap; }
+  .achievement-links a { font-family: var(--mono); font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 1px; border-bottom: 1px dotted var(--accent); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .achievement-links a:hover { color: #fff; border-color: #fff; }
   .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
   .article-card { background: var(--surface); border: 1px solid var(--border); padding: 32px; text-decoration: none; display: block; transition: all 0.25s; position: relative; overflow: hidden; }
   .article-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
@@ -230,7 +237,7 @@
     <span class="stat-label">GitHub Commits</span>
   </div>
   <div class="stat">
-    <span class="stat-num">12</span>
+    <span class="stat-num">15</span>
     <span class="stat-label">Medium Articles</span>
   </div>
   <div class="stat">
@@ -286,7 +293,7 @@
     <div class="skill-card" data-num="06">
       <span class="skill-icon">📝</span>
       <div class="skill-name">Technical Writing</div>
-      <div class="skill-desc">12 published Medium articles on cybersecurity. GitHub writeups covering all PortSwigger labs, CTF challenges and real-world findings.</div>
+      <div class="skill-desc">15 published Medium articles on cybersecurity. GitHub writeups covering all PortSwigger labs, CTF challenges and real-world findings.</div>
     </div>
   </div>
 </section>
@@ -298,6 +305,27 @@
   <div class="section-label">Track Record</div>
   <h2 class="section-title">Achievements</h2>
   <div class="achievements">
+
+    <div class="achievement featured">
+      <div class="achievement-date">Jul 2026</div>
+      <div class="achievement-title">⚡ BRAMHASTRA — AI Red-Teaming Framework <span class="featured-tag">Flagship</span></div>
+      <div class="achievement-tagline">Open-source. Research-grade. Ready to use.</div>
+      <div class="achievement-desc">Built an advanced multi-model prompt injection testing framework evaluating LLM security across Llama3, Mistral, and Phi. Tested 10+ attack vectors — system prompt extraction, jailbreak, data exfiltration, token smuggling — and identified 23/30 vulnerabilities. Added consistency testing across repeated runs, proving LLM security is probabilistic, not deterministic. Open-sourced with JSON reporting and color-coded CLI output.</div>
+      <div class="terminal-box">
+        <span class="t-comment">// Vulnerability breakdown</span><br>
+        <span class="t-key">LLAMA3</span> &nbsp;<span class="t-val">→ 8/10 vulnerable</span><br>
+        <span class="t-key">MISTRAL</span> &nbsp;<span class="t-warn">→ 10/10 vulnerable — complete compromise</span><br>
+        <span class="t-key">PHI</span> &nbsp;<span class="t-val">→ 5/10 vulnerable</span><br>
+        <span class="t-ok">CONSISTENCY</span> &nbsp;<span class="t-val">→ 0/4 payloads consistent across 3 runs</span>
+      </div>
+      <span class="badge">AI Security</span>
+      <span class="badge badge-purple">Tool Development</span>
+      <span class="badge badge-red">Multi-Model Red-Teaming</span>
+      <div class="achievement-links">
+        <a href="https://github.com/CalculusGuy/BRAMHASTRA" target="_blank">→ GitHub Repo</a>
+        <a href="https://medium.com/@nilanjan.calculus/bramhastra-i-asked-3-llms-to-leak-their-secrets-one-failed-spectacularly-3d48c3bb1038" target="_blank">→ Medium Article</a>
+      </div>
+    </div>
 
     <div class="achievement">
       <div class="achievement-date">Jun 2026</div>
@@ -423,7 +451,7 @@
     <div class="achievement">
       <div class="achievement-date">2026</div>
       <div class="achievement-title">Deloitte Forage — Commendation for Outstanding Work</div>
-      <div class="achievement-desc">Received commendation for outstanding performance on Deloitte Australia Cybersecurity Job Simulation. Also completed EY Technology Risk and TATA Cybersecurity Analyst Forage simulations with commendations. IBM SkillsBuild certificate. HackerDNA Rank #475.</div>
+      <div class="achievement-desc">Received commendation for outstanding performance on Deloitte Australia Cybersecurity Job Simulation. Also completed EY Technology Risk and TATA Cybersecurity Analyst Forage simulations with commendations. IBM SkillsBuild certificate. Cisco Certified Cybersecurity Fundamentals. HackerDNA Rank #475.</div>
       <span class="badge">Certification</span>
     </div>
 
@@ -458,8 +486,8 @@
       <div class="article-desc">All Apprentice XSS labs + first Practitioner solved in one 4-hour session. Burp Suite, DOM injection, AngularJS template injection.</div>
     </a>
     <a href="https://medium.com/@nilanjan.calculus" target="_blank" class="article-card">
-      <div class="article-tag">Medium · 12 Articles</div>
-      <div class="article-title">View All 12 Articles on Medium →</div>
+      <div class="article-tag">Medium · 15 Articles</div>
+      <div class="article-title">View All 15 Articles on Medium →</div>
       <div class="article-desc">Technical writeups covering XSS, CSRF, SSRF, XXE, Web LLM, Business Logic, SQLi, Prompt Injection, AI Security, DIVYASTRA, Garak, and more.</div>
     </a>
   </div>
@@ -532,6 +560,14 @@
       <button class="modal-close" onclick="closeModal('work-modal')">✕</button>
     </div>
     <div class="modal-section-label">// GitHub Repositories</div>
+    <a href="https://github.com/CalculusGuy/BRAMHASTRA" target="_blank" class="modal-link-card">
+      <div class="modal-link-icon">⚡</div>
+      <div>
+        <div class="modal-link-title">BRAMHASTRA — AI Red-Teaming Framework</div>
+        <div class="modal-link-desc">Multi-model prompt injection testing · Llama3, Mistral, Phi · 23/30 vulnerabilities found</div>
+      </div>
+      <div class="modal-link-arrow">→</div>
+    </a>
     <a href="https://github.com/CalculusGuy/DIVYASTRA" target="_blank" class="modal-link-card">
       <div class="modal-link-icon">🔴</div>
       <div>
@@ -573,6 +609,14 @@
       <div class="modal-link-arrow">→</div>
     </a>
     <div class="modal-section-label">// Medium Articles</div>
+    <a href="https://medium.com/@nilanjan.calculus/bramhastra-i-asked-3-llms-to-leak-their-secrets-one-failed-spectacularly-3d48c3bb1038" target="_blank" class="modal-link-card">
+      <div class="modal-link-icon">✍️</div>
+      <div>
+        <div class="modal-link-title">BRAMHASTRA: I Asked 3 LLMs to Leak Their Secrets</div>
+        <div class="modal-link-desc">One failed spectacularly · Multi-model jailbreak testing writeup</div>
+      </div>
+      <div class="modal-link-arrow">→</div>
+    </a>
     <a href="https://medium.com/@nilanjan.calculus/i-spent-a-week-breaking-every-csrf-defense-on-portswigger-heres-what-i-learned-15fc5d91be4c" target="_blank" class="modal-link-card">
       <div class="modal-link-icon">✍️</div>
       <div>
@@ -584,7 +628,7 @@
     <a href="https://medium.com/@nilanjan.calculus" target="_blank" class="modal-link-card">
       <div class="modal-link-icon">✍️</div>
       <div>
-        <div class="modal-link-title">All 12 Articles — Medium Profile</div>
+        <div class="modal-link-title">All 15 Articles — Medium Profile</div>
         <div class="modal-link-desc">XXE, SSRF, CSRF, XSS, Web LLM, Business Logic, SQLi, Prompt Injection, AI Security, DIVYASTRA, Garak</div>
       </div>
       <div class="modal-link-arrow">→</div>
